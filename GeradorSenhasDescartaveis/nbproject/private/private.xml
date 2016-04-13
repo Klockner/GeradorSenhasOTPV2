@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/GeradorSenhasDescartaveis/src/Aplicativo/MainServer.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/GeradorSenhasDescartaveis/src/GeradorSenha/Usuario.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/GeradorSenhasDescartaveis/src/Aplicativo/GeradorOTP.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/GeradorSenhasDescartaveis/src/Aplicativo/WindowAplicativo.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/GeradorSenhasDescartaveis/src/GeradorSenha/WindowGerador.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/GeradorSenhasDescartaveis/src/GeradorSenha/GeradorOTP.java</file>
+            <file>file:/home/klockner/UTFPR/GeradorSenhasOTPV2/GeradorSenhasDescartaveis/src/GeradorSenha/GeradorOTP.java</file>
+            <file>file:/home/klockner/UTFPR/GeradorSenhasOTPV2/GeradorSenhasDescartaveis/src/Aplicativo/WindowAplicativo.java</file>
+            <file>file:/home/klockner/UTFPR/GeradorSenhasOTPV2/GeradorSenhasDescartaveis/src/GeradorSenha/WindowGerador.java</file>
         </group>
     </open-files>
 </project-private>

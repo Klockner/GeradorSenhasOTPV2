@@ -9,27 +9,59 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Gabriel
  */
 public class GeradorOTP {
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyHHmm");
+    String primeiraDataHora;
+    String dataHora;
+    
+    class TimerToken extends Thread {
+
+        @Override
+        public void run() {
+            try {
+                sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GeradorOTP.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (true) {
+                Date data = new Date();
+                dataHora = simpleDateFormat.format(data);
+                if (!primeiraDataHora.equals(dataHora)) {
+                    gerarTokens(hashMd5Semente, numeroTokens);
+                    primeiraDataHora = dataHora;
+                }
+            }
+        }
+    }
+    
     private final long SALT = 1234554321;
+    private byte[] hashMd5Semente;
     private List listaTokens;
     public int numeroTokens = 0;
     private String token;
+    
+    public GeradorOTP() {
+        TimerToken timerToken = new TimerToken();
+        timerToken.start();
+    }
     
     // Fórmula token
     //(hashSemente + SALT) * i
     public void gerarTokens(byte[] hashMd5Semente, int numeroTokens) {
         System.out.println("GERADOR SENHA: ");
         this.numeroTokens = numeroTokens;
+        this.hashMd5Semente = hashMd5Semente;
         
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyHHmm");
         Date data = new Date();
-        String dataHora = simpleDateFormat.format(data);
-        String concatDataHora = dataHora.concat(hashMd5Semente.toString());
+        primeiraDataHora = simpleDateFormat.format(data);
+        String concatDataHora = primeiraDataHora.concat(hashMd5Semente.toString());
         listaTokens = new ArrayList<>();
 //        byte[] hashToken = concatDataHora.getBytes();
 

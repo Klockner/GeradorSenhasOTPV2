@@ -39,7 +39,8 @@ public class Usuario {
             FileWriter arq = new FileWriter("HashSemente.txt");
             PrintWriter escreveArq = new PrintWriter(arq);
             
-            escreveArq.print(hashMd5Semente);
+            escreveArq.println(hashMd5Semente);
+            escreveArq.print(nome);
             
             arq.close();
         } catch (FileNotFoundException e) {
