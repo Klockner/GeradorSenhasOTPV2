@@ -18,20 +18,60 @@ import java.util.List;
  *
  * @author Gabriel
  */
-public class GeradorOTP {
+public final class GeradorOTP {
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyHHmm");
+    String primeiraDataHora;
+    String dataHora;
+
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    class TimerToken extends Thread {
+
+        @Override
+        public void run() {
+            while (true) {
+                Date data = new Date();
+                dataHora = simpleDateFormat.format(data);
+                if (!primeiraDataHora.equals(dataHora)) {
+                    gerarTokens(numeroTokens);
+                    primeiraDataHora = dataHora;
+                }
+            }
+        }
+    }
+    
     public int numeroTokens = 0;
-//    private byte[] hashMd5Semente;
     private String hashMd5Semente;
     private List listaTokens;
     private String token;
     private final long SALT = 1234554321;
+    private String nome;
+    
+    public GeradorOTP() {
+        lerHashSemente();
+        gerarTokens(5);
+        TimerToken timerToken = new TimerToken();
+        timerToken.start();
+    }
     
     public void lerHashSemente() {
         try {
             FileReader arq = new FileReader("HashSemente.txt");
             BufferedReader lerArq = new BufferedReader(arq); 
-            String linha = lerArq.readLine();
-            hashMd5Semente = linha;
+            hashMd5Semente = lerArq.readLine();
+            nome = lerArq.readLine();
 //            hashMd5Semente = linha.getBytes();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -45,12 +85,11 @@ public class GeradorOTP {
         
         this.numeroTokens = numeroTokens;
         
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyHHmm");
         Date data = new Date();
-        String dataHora = simpleDateFormat.format(data);
+        primeiraDataHora = simpleDateFormat.format(data);
         
 //        String concatDataHora = dataHora.concat(hashMd5Semente.toString());
-        String concatDataHora = dataHora.concat(hashMd5Semente);
+        String concatDataHora = primeiraDataHora.concat(hashMd5Semente);
         listaTokens = new ArrayList<>();
         token = String.valueOf(Math.abs(concatDataHora.hashCode() + SALT));
         listaTokens.add(token);

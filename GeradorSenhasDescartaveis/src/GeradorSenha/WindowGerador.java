@@ -18,6 +18,7 @@ public class WindowGerador extends javax.swing.JFrame {
      */
     public WindowGerador() {
         initComponents();
+        this.setTitle("Gerador Senha");
     }
 
     /**
@@ -57,6 +58,9 @@ public class WindowGerador extends javax.swing.JFrame {
                 btnHashSementeActionPerformed(evt);
             }
         });
+
+        txtToken.setEditable(false);
+        txtToken.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
 
         btnGerarTokens.setText("Gerar Tokens");
         btnGerarTokens.addActionListener(new java.awt.event.ActionListener() {
@@ -103,10 +107,10 @@ public class WindowGerador extends javax.swing.JFrame {
                     .addComponent(btnHashSemente)
                     .addComponent(btnGerarTokens))
                 .addGap(25, 25, 25)
-                .addComponent(txtToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtToken, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGerarToken)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -124,6 +128,7 @@ public class WindowGerador extends javax.swing.JFrame {
     private void btnGerarTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarTokensActionPerformed
         geradorOtp = new GeradorOTP();
         geradorOtp.gerarTokens(usuario.getHashMd5Semente(), 5);
+        btnGerarTokens.setVisible(false);
     }//GEN-LAST:event_btnGerarTokensActionPerformed
 
     /**

@@ -19,7 +19,7 @@ public class WindowAplicativo extends javax.swing.JFrame {
      */
     public WindowAplicativo() {
         initComponents();
-        geradorOtp = new GeradorOTP();
+        this.setTitle("Aplicativo");
     }
 
     /**
@@ -37,6 +37,8 @@ public class WindowAplicativo extends javax.swing.JFrame {
         btnGerarTokens = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtToken.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
 
         btnEntrar.setText("Validar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -64,10 +66,10 @@ public class WindowAplicativo extends javax.swing.JFrame {
                     .addComponent(txtToken)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 351, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnGerarTokens)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                         .addComponent(btnEntrar)))
                 .addContainerGap())
         );
@@ -77,12 +79,12 @@ public class WindowAplicativo extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(txtToken, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEntrar)
-                    .addComponent(btnGerarTokens))
-                .addContainerGap(213, Short.MAX_VALUE))
+                    .addComponent(btnGerarTokens)
+                    .addComponent(btnEntrar))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,15 +92,15 @@ public class WindowAplicativo extends javax.swing.JFrame {
  
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if (geradorOtp.validaToken(txtToken.getText())) {
-            JOptionPane.showMessageDialog(this, "Token válido, acesso liberado.");
+            JOptionPane.showMessageDialog(this, "Token válido, acesso liberado. Bem-vindo " + geradorOtp.getNome() + "!");
         } else {
             JOptionPane.showMessageDialog(this, "Token inválido, acesso negado.");
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnGerarTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarTokensActionPerformed
-        geradorOtp.lerHashSemente();
-        geradorOtp.gerarTokens(5);
+        geradorOtp = new GeradorOTP();
+        btnGerarTokens.setVisible(false);
     }//GEN-LAST:event_btnGerarTokensActionPerformed
 
     /**
