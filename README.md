@@ -1,2 +1,2 @@
-# GeradorSenhasOTPV2
+# Java OTP (Token)
 Java OTP tokens generator
